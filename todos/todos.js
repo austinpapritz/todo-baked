@@ -24,9 +24,11 @@ todoForm.addEventListener('submit', async (e) => {
     todoForm.reset();
 
     const newDo = await createTodo(todo);
-    // if (newDo) {
-
-    // }
+    if (newDo) {
+        displayTodos();
+    } else {
+        todosEl.textContent = 'Something went wrong adding a todo';
+    }
 });
 
 // create todo state
