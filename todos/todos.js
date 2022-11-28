@@ -34,24 +34,34 @@ todoForm.addEventListener('submit', async (e) => {
 // create todo state
 let todos = [];
 
+window.addEventListener('load', async () => {
+    await fetchAndDisplayTodos();
+});
+
 // add async complete todo handler function
-async function fetchAndDisplayTodos() {
+async function handleComplete() {
     // call completeTodo
     completeTodo();
     // swap out todo in array
     // call displayTodos
-    displayTodos();
+    await fetchAndDisplayTodos();
 }
 
-async function displayTodos() {
+async function fetchAndDisplayTodos() {
     // clear the container (.innerHTML = '')
     todosEl.innerHTML = '';
     // display the list of todos,
     // call render function, pass in state and complete handler function!
     // append to .todos
+    let todos = await getTodos();
+    if (todos) {
+        for (let todo of todos) {
+            const todoEl = renderTodo(todo, handleComplete);
+            todosEl.append(todoEl);
+        }
+    }
 }
 
-// add page load function
 // fetch the todos and store in state
 // call displayTodos
 
