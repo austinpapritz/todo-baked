@@ -25,14 +25,13 @@ todoForm.addEventListener('submit', async (e) => {
 
     const newDo = await createTodo(todo);
     if (newDo) {
-        displayTodos();
+        fetchAndDisplayTodos();
     } else {
         todosEl.textContent = 'Something went wrong adding a todo';
     }
 });
 
-// create todo state
-let todos = [];
+// create todo state -- no
 
 window.addEventListener('load', async () => {
     await fetchAndDisplayTodos();
@@ -71,6 +70,8 @@ logoutButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', async () => {
     // delete all todos
+    deleteAllTodos();
     // modify state to match
     // re displayTodos
+    fetchAndDisplayTodos();
 });
