@@ -38,9 +38,9 @@ export async function completeTodo(id) {
         .from('todos')
         .select('*')
         .match({ user_id: client.auth.user().id });
-    console.log(response, 'response');
+    console.log(response, 'completeTodo response');
     // once you have a response from supabase, comment this back in:
-    // return checkError(response);
+    // return checkError(response)
 }
 
 export function getUser() {

@@ -35,9 +35,13 @@ todoForm.addEventListener('submit', async (e) => {
 let todos = [];
 
 // add async complete todo handler function
-// call completeTodo
-// swap out todo in array
-// call displayTodos
+async function fetchAndDisplayTodos() {
+    // call completeTodo
+    completeTodo();
+    // swap out todo in array
+    // call displayTodos
+    displayTodos();
+}
 
 async function displayTodos() {
     // clear the container (.innerHTML = '')
