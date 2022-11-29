@@ -37,15 +37,6 @@ window.addEventListener('load', async () => {
     await fetchAndDisplayTodos();
 });
 
-// add async complete todo handler function
-async function handleComplete() {
-    // call completeTodo
-    completeTodo();
-    // swap out todo in array
-    // call displayTodos
-    await fetchAndDisplayTodos();
-}
-
 async function fetchAndDisplayTodos() {
     // clear the container (.innerHTML = '')
     todosEl.innerHTML = '';
@@ -55,7 +46,12 @@ async function fetchAndDisplayTodos() {
     let todos = await getTodos();
     if (todos) {
         for (let todo of todos) {
-            const todoEl = renderTodo(todo, handleComplete);
+            const todoEl = renderTodo(todo);
+            console.log(todo, 'todo');
+            todoEl.addEventListener('click', async () => {
+                await completeTodo(todo.id);
+                await fetchAndDisplayTodos();
+            });
             todosEl.append(todoEl);
         }
     }
@@ -70,7 +66,7 @@ logoutButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', async () => {
     // delete all todos
-    deleteAllTodos();
+    await deleteAllTodos();
     // modify state to match
     // re displayTodos
     fetchAndDisplayTodos();
